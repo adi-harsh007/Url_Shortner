@@ -4,25 +4,24 @@ import { ParticleWave } from "@/components/ui/particle-wave";
 import { Link2, ArrowRight, Copy, Check } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
-
+import axios from 'axios'
 export default function ShortenerPage() {
     const [url, setUrl] = useState("");
     const [shortenedUrl, setShortenedUrl] = useState("");
     const [isCopied, setIsCopied] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
-    const handleShorten = (e: React.FormEvent) => {
+    const handleShorten =async  (e: React.FormEvent) => {
         e.preventDefault();
-        if (!url) return;
-
         setIsLoading(true);
-        // Simulate network request
-        setTimeout(() => {
-            // Mock generated URL
-            const hash = Math.random().toString(36).substring(2, 8);
-            setShortenedUrl(`ziplink.io/${hash}`);
-            setIsLoading(false);
-        }, 1200);
+        const response:any=await axios.post('https://zl-mu.vercel.app/create',{
+            originalString:url
+        })
+
+        console.log(response)
+        setShortenedUrl(`https://zl-mu.vercel.app/${response.data.string}`)
+        setIsLoading(false);
+        
     };
 
     const copyToClipboard = () => {
