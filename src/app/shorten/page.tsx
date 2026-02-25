@@ -4,7 +4,7 @@ import { ParticleWave } from "@/components/ui/particle-wave";
 import { Link2, ArrowRight, Copy, Check } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
-import axios from 'axios'
+import axios from "axios"
 export default function ShortenerPage() {
     const [url, setUrl] = useState("");
     const [shortenedUrl, setShortenedUrl] = useState("");
